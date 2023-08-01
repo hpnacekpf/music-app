@@ -1,10 +1,11 @@
-import LayoutComponent from "./Components/layout.tsx";
+import RoutesApp from "./Routes/routes.tsx";
+import { BrowserRouter } from 'react-router-dom';
 
 function AppComponent() {
   return (
-    <>
-      <LayoutComponent/>
-    </>
+    <BrowserRouter>
+      <RoutesApp/>
+    </BrowserRouter>
   );
 }
 

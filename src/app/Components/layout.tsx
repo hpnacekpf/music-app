@@ -1,30 +1,62 @@
 import { NavbarComponent } from "./Partials/Navbar.tsx";
 import { HeaderComponent } from "./Partials/Header.tsx";
+import {
+  IconAdjustments,
+  IconCalendarStats,
+  IconFileAnalytics,
+  IconGauge, IconLock,
+  IconNotes,
+  IconPresentationAnalytics, TablerIconsProps
+} from "@tabler/icons-react";
+import { createStyles } from "@mantine/core";
+import { Outlet  } from "react-router-dom";
+
+const useStyles = createStyles(() => ({
+  container: {
+    display: 'flex',
+  },
+  content: {
+    width: '100%',
+  }
+}));
+
+interface HeaderResponsiveProps {link: string; icon: (props: TablerIconsProps) => JSX.Element; label: string}
+
 
 function LayoutComponent() {
-  const  links= [
+  const {classes} = useStyles();
+
+  const mockdata: HeaderResponsiveProps[] = [
+    {label: 'Dashboard', icon: IconGauge, link: '/'},
     {
-      "link": "/about",
-      "label": "Features"
+      label: 'Market news',
+      icon: IconNotes,
+      link: '/detail'
     },
     {
-      "link": "/pricing",
-      "label": "Pricing"
+      label: 'Releases',
+      icon: IconCalendarStats,
+      link: 'releases'
     },
+    {label: 'Analytics', icon: IconPresentationAnalytics, link: 'analytics'},
+    {label: 'Contracts', icon: IconFileAnalytics, link: 'contracts'},
+    {label: 'Settings', icon: IconAdjustments, link: 'settings'},
     {
-      "link": "/learn",
-      "label": "Learn"
+      label: 'Security',
+      icon: IconLock,
+      link: 'security'
     },
-    {
-      "link": "/community",
-      "label": "Community"
-    }
   ];
 
   return (
     <div>
-      <HeaderComponent links={links}/>
-      <NavbarComponent/>
+      <HeaderComponent links={mockdata}/>
+      <div className={classes.container}>
+        <NavbarComponent mockData={mockdata}/>
+        <div className={classes.content}>
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 }

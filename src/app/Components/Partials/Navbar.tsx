@@ -1,50 +1,22 @@
 import { Navbar, ScrollArea, createStyles, rem } from '@mantine/core';
-import {
-  IconNotes,
-  IconCalendarStats,
-  IconGauge,
-  IconPresentationAnalytics,
-  IconFileAnalytics,
-  IconAdjustments,
-  IconLock,
-} from '@tabler/icons-react';
 import { LinksGroup } from './NavbarLinksGroup/NavbarLinksGroup';
 import { UserButton } from "./UserButton/UserButton.tsx";
-
-const mockdata = [
-  {label: 'Dashboard', icon: IconGauge},
-  {
-    label: 'Market news',
-    icon: IconNotes,
-    initiallyOpened: true,
-  },
-  {
-    label: 'Releases',
-    icon: IconCalendarStats,
-  },
-  {label: 'Analytics', icon: IconPresentationAnalytics},
-  {label: 'Contracts', icon: IconFileAnalytics},
-  {label: 'Settings', icon: IconAdjustments},
-  {
-    label: 'Security',
-    icon: IconLock,
-  },
-];
+import { Link } from "react-router-dom";
+import { TablerIconsProps } from "@tabler/icons-react";
 
 const useStyles = createStyles((theme) => ({
   navbar: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
     paddingBottom: 0,
+
+    [theme.fn.smallerThan('xs')]: {
+      display: 'none',
+    },
   },
 
   links: {
     marginLeft: `calc(${theme.spacing.md} * -1)`,
     marginRight: `calc(${theme.spacing.md} * -1)`,
-  },
-
-  linksInner: {
-    // paddingTop: theme.spacing.xl,
-    // paddingBottom: theme.spacing.xl,
   },
 
   footer: {
@@ -56,15 +28,27 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-export function NavbarComponent() {
+interface HeaderResponsiveItemProps {link: string; icon: (props: TablerIconsProps) => JSX.Element; label: string}
+
+interface HeaderResponsiveProps {
+  mockData: { link: string; icon: (props: TablerIconsProps) => JSX.Element; label: string }[];
+}
+
+export function NavbarComponent({mockData}: HeaderResponsiveProps) {
   const {classes} = useStyles();
-  const links = mockdata.map((item) => <LinksGroup {...item} key={item.label}/>);
+  const links = mockData.map((item: HeaderResponsiveItemProps, index: number) => {
+    return (
+      <Link style={{ textDecoration: 'none' }} key={index} to={item.link}>
+        <LinksGroup {...item}/>
+      </Link>
+    )
+  });
 
   return (
     <Navbar width={{sm: 300}} p="md" className={classes.navbar}>
 
       <Navbar.Section grow className={classes.links} component={ScrollArea}>
-        <div className={classes.linksInner}>{links}</div>
+        <div>{links}</div>
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>

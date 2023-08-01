@@ -42,15 +42,13 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    minWidth: 'calc(100% - 32px)',
+    minWidth: '100%',
     height: '100%',
     margin: 0
   },
 
   links: {
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none',
-    },
+    display: 'none',
   },
 
   burger: {
@@ -90,7 +88,15 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan('xs')]: {
       display: 'none',
     },
+    [theme.fn.smallerThan('sm')]: {
+      width: '100%'
+    },
+    width: '400px'
   },
+  searchMobile: {
+    margin: '5px',
+    width: 'calc(100% - 10px)',
+  }
 }));
 
 interface HeaderResponsiveProps {
@@ -133,16 +139,23 @@ export function HeaderComponent({links}: HeaderResponsiveProps) {
           {items}
         </Group>
 
+        <ActionToggle/>
+
         <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm"/>
 
         <Transition transition="pop-top-right" duration={200} mounted={opened}>
           {(styles) => (
             <Paper className={classes.dropdown} withBorder style={styles}>
+              <Autocomplete
+                className={classes.searchMobile}
+                placeholder="Search"
+                icon={<IconSearch size="1rem" stroke={1.5}/>}
+                data={[]}
+              />
               {items}
             </Paper>
           )}
         </Transition>
-        {/*<ActionToggle/>*/}
       </Container>
     </Header>
   );
