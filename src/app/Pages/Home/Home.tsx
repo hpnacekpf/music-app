@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { music } from '../../Store/Music/music.ts';
+import { music } from '../../Store';
+import {RootState} from "../../Store";
 
 function HomeComponent() {
   const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state: any) => state.music);
+  const { data, loading, error } = useSelector((state: RootState) => state.music);
+  console.log(data);
 
   useEffect(() => {
     console.log(1);
@@ -14,7 +16,7 @@ function HomeComponent() {
   if (loading) {
     return <div>Loading...</div>;
   } else if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div>Error: {error}</div>;
   } else {
     return (
       <div>
@@ -22,9 +24,6 @@ function HomeComponent() {
       </div>
     );
   }
-  return (
-    <div>HomePage</div>
-  );
 }
 
 export default HomeComponent;

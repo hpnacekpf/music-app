@@ -1,8 +1,9 @@
-import { takeLatest, put, call } from 'redux-saga/effects';
+import {takeEvery, put, call, all} from 'redux-saga/effects';
 import { music } from './music.ts';
 import { api } from '../../Services/api.ts'
 
 function* fetchData(): Generator {
+  console.log('Fetching data');
   try {
     yield put(music.actions.getDataMusicStart());
     const data = yield call(api.getDataMusics);
@@ -14,5 +15,7 @@ function* fetchData(): Generator {
 }
 
 export function* musicSaga() {
-  yield takeLatest('getDataMusic', fetchData);
+  yield all([
+    takeEvery('getDataMusic', fetchData)
+  ])
 }

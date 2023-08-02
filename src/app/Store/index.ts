@@ -35,7 +35,7 @@ export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({
     serializableCheck: false
-  }).concat(sagaMiddleware) // , logger
+  }).concat(sagaMiddleware)
 });
 
 sagaMiddleware.run(rootSaga);
