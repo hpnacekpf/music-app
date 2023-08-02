@@ -2,12 +2,12 @@ import { PayloadAction, combineReducers, configureStore } from '@reduxjs/toolkit
 import createSagaMiddleware from 'redux-saga';
 import { all, fork } from "redux-saga/effects";
 import { persistReducer } from 'redux-persist'
-import storage from 'redux-persist-indexeddb-storage';
-import { music } from './Music/musicSaga.ts';
+import createIdbStorage from '@piotr-cz/redux-persist-idb-storage'
+import { music, initialState as initialStateMusic } from './Music/music.ts';
 import { musicSaga } from './Music/musicSaga.ts'
 
 const initialGlobalState = {
-  music: music.initialState,
+  music: initialStateMusic,
 };
 
 function* rootSaga() {
@@ -21,12 +21,12 @@ function globalReducer(state = initialGlobalState, action: PayloadAction<unknown
 
 const sagaMiddleware = createSagaMiddleware();
 const combinedRds = combineReducers({
-  chat: music.reducer,
+  music: music.reducer,
 });
 
 const persistConfig = {
   key: 'root',
-  storage: storage('myDb'),
+  storage: createIdbStorage({name: 'musicApp', storeName: 'music-app'}),
   version: 2
 };
 const persistedReducer = persistReducer(persistConfig, globalReducer);

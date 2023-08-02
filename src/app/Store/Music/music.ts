@@ -1,12 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+interface MusicState {
+  data: null,
+  loading: boolean,
+  error: null,
+}
+
+export const initialState: MusicState = {
+  data: null,
+  loading: false,
+  error: null,
+};
+
 export const music = createSlice({
   name: 'music',
-  initialState: {
-    data: null,
-    loading: false,
-    error: null,
-  },
+  initialState,
   reducers: {
     getDataMusicStart: (state) => {
       state.loading = true;
