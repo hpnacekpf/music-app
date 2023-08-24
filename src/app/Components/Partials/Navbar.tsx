@@ -45,7 +45,7 @@ export function NavbarComponent({mockData}: HeaderResponsiveProps) {
   });
 
   return (
-    <Navbar width={{sm: 300}} p="md" className={classes.navbar}>
+    <Navbar width={{sm: 250}} p="md" className={classes.navbar}>
 
       <Navbar.Section grow className={classes.links} component={ScrollArea}>
         <div>{links}</div>

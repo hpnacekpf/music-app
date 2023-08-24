@@ -1,6 +1,8 @@
 import AppComponent from './app/index.tsx'
 import { ColorScheme, ColorSchemeProvider, MantineProvider } from "@mantine/core";
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
+import store from "./app/Store";
+import { Provider } from "react-redux";
 
 function App() {
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
@@ -15,11 +17,13 @@ function App() {
   useHotkeys([['mod+J', () => toggleColorScheme()]]);
 
   return (
-    <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-      <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
-        <AppComponent />
-      </MantineProvider>
-    </ColorSchemeProvider>
+    <Provider store={store}>
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+          <AppComponent />
+        </MantineProvider>
+      </ColorSchemeProvider>
+    </Provider>
   )
 }
 

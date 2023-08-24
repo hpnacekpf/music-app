@@ -130,7 +130,7 @@ export function HeaderComponent({links}: HeaderResponsiveProps) {
         <Group>
           <Autocomplete
             className={classes.search}
-            placeholder="Search"
+            placeholder="Tìm kiếm"
             icon={<IconSearch size="1rem" stroke={1.5}/>}
             data={[]}
           />

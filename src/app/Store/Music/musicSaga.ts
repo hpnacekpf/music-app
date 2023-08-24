@@ -1,21 +1,12 @@
-import {takeEvery, put, call, all} from 'redux-saga/effects';
-import { music } from './music.ts';
+import {put, call} from 'redux-saga/effects';
+import musicSlice from './musicSlice.ts';
 import { api } from '../../Services/api.ts'
 
-function* fetchData(): Generator {
-  console.log('Fetching data');
+export default function* fetchDataMusic() {
   try {
-    yield put(music.actions.getDataMusicStart());
-    const data = yield call(api.getDataMusics);
-    console.log(data);
-    yield put(music.actions.getDataMusicSuccess(data));
+    const response = yield call(api.getDataMusics);
+    yield put(musicSlice.actions.getDataSuccess(response));
   } catch (error) {
-    yield put(music.actions.getDataMusicFailure(error));
+    yield put(musicSlice.actions.getDataFailure(error.message));
   }
-}
-
-export function* musicSaga() {
-  yield all([
-    takeEvery('getDataMusic', fetchData)
-  ])
 }
