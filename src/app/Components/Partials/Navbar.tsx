@@ -9,6 +9,10 @@ const useStyles = createStyles((theme) => ({
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
     paddingBottom: 0,
 
+    [theme.fn.largerThan('xs')]: {
+      width: '250px',
+    },
+
     [theme.fn.smallerThan('xs')]: {
       display: 'none',
     },

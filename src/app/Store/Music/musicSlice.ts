@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 interface MusicState {
-  data: {[key: string]: unknown},
+  data: any,
   loading: boolean,
-  error: null,
+  error?: {message?: string} | null,
 }
 
 const musicSlice = createSlice({
