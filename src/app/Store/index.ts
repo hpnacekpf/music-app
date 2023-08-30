@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
 import musicSlice from "./Music/musicSlice.ts";
+import audioReducer from "./Audio/audioSlice.ts";
 import { all } from "redux-saga/effects";
 import fetchDataMusic from './Music/musicSaga.ts';
 
@@ -14,6 +15,7 @@ const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({
   reducer: {
     music: musicSlice.reducer,
+    audio: audioReducer,
   },
   middleware: [sagaMiddleware],
 });

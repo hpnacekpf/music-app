@@ -10,6 +10,7 @@ import {
 } from "@tabler/icons-react";
 import { createStyles } from "@mantine/core";
 import { Outlet  } from "react-router-dom";
+import Player from "./Partials/Player";
 
 const useStyles = createStyles(() => ({
   container: {
@@ -57,6 +58,7 @@ function LayoutComponent() {
           <Outlet />
         </div>
       </div>
+      <Player/>
     </div>
   );
 }

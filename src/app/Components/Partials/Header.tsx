@@ -96,6 +96,20 @@ const useStyles = createStyles((theme) => ({
   searchMobile: {
     margin: '5px',
     width: 'calc(100% - 10px)',
+  },
+  imageLogo: {
+    [theme.fn.smallerThan('xs')]: {
+      display: '50%',
+    },
+    [theme.fn.smallerThan('sm')]: {
+      width: '50%'
+    },
+    [theme.fn.largerThan('xs')]: {
+      width: '30%'
+    },
+    [theme.fn.largerThan('lg')]: {
+      width: '10%'
+    },
   }
 }));
 
@@ -127,6 +141,7 @@ export function HeaderComponent({links}: HeaderResponsiveProps) {
     <Header height={HEADER_HEIGHT} className={classes.root}>
       <Container className={classes.header}>
         <MantineLogo size={28}/>
+        {/*<img className={classes.imageLogo} src="/src/app/assets/images/hpnaceKPF.png"/>*/}
         <Group>
           <Autocomplete
             className={classes.search}
