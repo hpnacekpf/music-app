@@ -1,5 +1,5 @@
 import React from "react"
-import { SvgProps } from "../../utils/types"
+import { SvgProps } from "../../../utils/types"
 
 const Search: React.FC<SvgProps> = ({ setColor, setWidth, setHeight, ...orthers }) => {
   return (
