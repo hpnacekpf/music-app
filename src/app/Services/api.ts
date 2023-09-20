@@ -16,8 +16,15 @@ const getLyric = async (id: string) => {
   return data
 }
 
+const getDetailPlaylist = async (id: string) => {
+  const data = await NhacCuaTui.getPlaylistDetail(id);
+  console.log(data);
+  return data
+}
+
 export const api = {
   getDataMusics,
   getSong,
-  getLyric
+  getLyric,
+  getDetailPlaylist
 }

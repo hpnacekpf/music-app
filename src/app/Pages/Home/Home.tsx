@@ -5,18 +5,25 @@ import { RootState } from "../../Store"
 import { createStyles } from "@mantine/core";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import {Carousel} from '3d-react-carousal';
-import './home.css'
+import { Carousel } from '3d-react-carousal';
 import Loading3Dot from "../../Components/Partials/Icons/Loading3Dot.tsx";
+import PlayListCover from "../../Components/Partials/PlayListCover.tsx";
 
-type DataSlider = {
-  description: string;
-  imageUrl: string;
-  key: string;
-  order: number;
-  thumbnail: string;
-  title: string;
-  url: string;
+interface DataSlider {
+  description: string
+  imageUrl: string
+  key: string
+  order: number
+  thumbnail: string
+  title: string
+  url: string
+}
+
+interface typePlaylistCover {
+  items: []
+  title: string
+  key: string
+  thumbnail: string
 }
 
 const useStyles = createStyles(() => ({
@@ -62,6 +69,43 @@ function HomeComponent() {
       <div className={classes.boxContent}>
         <div className={classes.boxSlider}>
           <Carousel slides={dataSlider} autoplay={true} interval={3000}/>
+        </div>
+        <div className="mt-8">
+          <main className="inset-0 box-border pt-[32px] pb-[96px] px-[5vw]">
+            {/* Playlist */}
+            <div className="mt-8">
+              {
+                data.topicEvent
+                  ?
+                  data.topicEvent.map((e: any, i: number) => (
+                    <div key={i}>
+                      <div
+                        className="flex justify-between items-end text-[28px] font-bold text-[color:var(--color-text)] mt-9 mb-3 uppercase">
+                        {(e.groupName === "") ? "" : (e.groupName)}
+                      </div>
+                      <div
+                        className="grid grid-cols-5 gap-x-6 gap-y-11">
+                        {
+                          e.listPlaylist.map((element: typePlaylistCover, index: number) => (
+                            <PlayListCover
+                              key={index}
+                              title={element.title}
+                              link={`/playlist/${element.key}`}
+                              thumbnail={element.thumbnail}
+                            />
+                          ))
+                        }
+                      </div>
+                    </div>
+                  ))
+                  :
+                  <div className="flex justify-center">
+                    <Loading3Dot setColor="white" setWidth="30" setHeight="30"/>
+                  </div>
+              }
+            </div>
+            {/* End Playlist */}
+          </main>
         </div>
       </div>
     );
