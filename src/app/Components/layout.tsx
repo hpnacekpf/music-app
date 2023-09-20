@@ -16,6 +16,13 @@ const useStyles = createStyles(() => ({
   container: {
     display: 'flex',
   },
+  header: {
+    height: '55px',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+  },
   content: {
     width: '100%',
   }
@@ -51,9 +58,9 @@ function LayoutComponent() {
 
   return (
     <div>
-      <HeaderComponent links={mockdata}/>
+      <HeaderComponent className={classes.header} links={mockdata}/>
       <div className={classes.container}>
-        <NavbarComponent mockData={mockdata}/>
+        {/*<NavbarComponent mockData={mockdata}/>*/}
         <div className={classes.content}>
           <Outlet />
         </div>

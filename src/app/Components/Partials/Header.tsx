@@ -18,8 +18,10 @@ const HEADER_HEIGHT = rem(56);
 
 const useStyles = createStyles((theme) => ({
   root: {
-    position: 'relative',
-    zIndex: 1,
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
   },
 
   dropdown: {
@@ -43,7 +45,7 @@ const useStyles = createStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
     minWidth: '100%',
-    height: '100%',
+    height: '55px',
     margin: 0
   },
 

@@ -32,7 +32,8 @@ const useStyles = createStyles(() => ({
     margin: '16px auto',
   },
   boxSlider: {
-    width: '100%'
+    width: '100%',
+    marginTop: '75px'
   }
 }));
 

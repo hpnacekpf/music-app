@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { formatTime } from "../../utils/formatTime.ts"
-import { setSongId, changeIconPlay, setAutoPlay, setCurrnetIndexPlaylist } from "../redux/features/audioSlice"
+import { setSongId, changeIconPlay, setAutoPlay, setCurrnetIndexPlaylist } from "../../Store/Audio/audioSlice"
 import { useDispatch, useSelector } from "react-redux";
 
 interface typeTrackListDetailPlaylist {

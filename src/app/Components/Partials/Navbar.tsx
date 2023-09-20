@@ -8,6 +8,10 @@ const useStyles = createStyles((theme) => ({
   navbar: {
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
     paddingBottom: 0,
+    position: 'fixed',
+    top: '55px',
+    bottom: 0,
+    left: 0,
 
     [theme.fn.largerThan('xs')]: {
       width: '250px',
