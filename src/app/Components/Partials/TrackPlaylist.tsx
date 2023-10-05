@@ -85,7 +85,7 @@ const TrackListDetailPlaylist: React.FC<{ items: [] }> = ({ items }) => {
               {/* End Show Song VIP */}
 
               {/* Show Time Deration */}
-              <div className={"font-medium " + (currnetIndexPlaylist === i ? " text-[color:var(--color-primary)]" : " text-[color:var(--color-text)]")}>{formatTime(e.duration)}</div>
+              <div className={"font-medium " + (currnetIndexPlaylist === i ? " text-[color:var(--color-primary)]" : " text-[color:var(--color-text)]")}>{e.duration}</div>
               {/* End Show Time Deration */}
             </div>
           )

@@ -7,22 +7,19 @@ import { setPlaylistSong } from "../../Store/Audio/audioSlice.ts"
 import Loading3Dot from "../../Components/Partials/Icons/Loading3Dot.tsx";
 import { useDispatch } from "react-redux";
 
-interface playlistType {
+interface PlaylistType {
   thumbnailM: string
   title: string
   artists: []
   description: string
   like: number
   contentLastUpdate: number
-  song: {
-    total: string
-    items: []
-  }
+  songs: []
 }
 
 const DetailPlaylist: React.FC = () => {
 
-  const [dataDetailPlaylist, setDataDetailPlaylist] = useState<playlistType>()
+  const [dataDetailPlaylist, setDataDetailPlaylist] = useState<any>()
 
   const params = useParams<{playlistId: string}>()
 
@@ -32,9 +29,10 @@ const DetailPlaylist: React.FC = () => {
     (
       async () => {
         if(params.playlistId) {
-          const detailPlaylist:playlistType = await api.getDetailPlaylist(params.playlistId)
-          setDataDetailPlaylist(detailPlaylist)
-          dispatch(setPlaylistSong(detailPlaylist.song.items))
+          const detailPlaylist:any = await api.getDetailPlaylist(params.playlistId)
+          console.log('detailPlaylist', detailPlaylist.playlist);
+          setDataDetailPlaylist(detailPlaylist.playlist)
+          dispatch(setPlaylistSong(detailPlaylist.playlist.songs))
         }
       }
     )()
@@ -49,15 +47,15 @@ const DetailPlaylist: React.FC = () => {
           ?
           <>
             <DetailPlaylistInfo
-              thumbnailM={dataDetailPlaylist.thumbnailM}
+              thumbnailM={dataDetailPlaylist.thumbnail}
               title={dataDetailPlaylist.title}
               artists={dataDetailPlaylist.artists}
-              total={dataDetailPlaylist.song.total}
+              total={dataDetailPlaylist.songs.length.toString()}
               description={dataDetailPlaylist.description}
-              like={dataDetailPlaylist.like}
-              contentLastUpdate={dataDetailPlaylist.contentLastUpdate}
+              like={10}
+              contentLastUpdate={dataDetailPlaylist.dateModify}
             />
-            <TrackListDetailPlaylist items={dataDetailPlaylist.song.items}/>
+            <TrackListDetailPlaylist items={dataDetailPlaylist.songs}/>
           </>
           :
           <div className="flex justify-center">

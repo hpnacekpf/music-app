@@ -33,7 +33,7 @@ const useStyles = createStyles(() => ({
   },
   boxSlider: {
     width: '100%',
-    marginTop: '75px'
+    marginTop: '75px',
   }
 }));
 
@@ -69,7 +69,11 @@ function HomeComponent() {
     return (
       <div className={classes.boxContent}>
         <div className={classes.boxSlider}>
-          <Carousel slides={dataSlider} autoplay={true} interval={3000}/>
+          {dataSlider ? <Carousel slides={dataSlider} autoplay={true} interval={3000}/> :
+            <div className="flex justify-center">
+              <Loading3Dot setColor="white" setWidth="30" setHeight="30"/>
+            </div>
+          }
         </div>
         <div className="mt-8">
           <main className="inset-0 box-border pt-[32px] pb-[96px] px-[5vw]">

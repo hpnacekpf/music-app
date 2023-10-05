@@ -15,7 +15,7 @@ interface detailPlaylistInfoProps {
 
 const PlaylistInfo:React.FC<detailPlaylistInfoProps> = ({ thumbnailM, title, artists, total, description, like, contentLastUpdate }) => {
 
-  const playlistLastUpdate =  (new Date(contentLastUpdate*1000)).toLocaleDateString("vi-VN")
+  const playlistLastUpdate = contentLastUpdate;
 
   const styleButton = "flex justify-center items-center rounded-lg py-2 px-4 w-auto h-10 min-h-[40px] transition duration-300 hover:scale-105 mr-4"
 
